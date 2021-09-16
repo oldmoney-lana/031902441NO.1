@@ -1,0 +1,61 @@
+void search(sensitivewords& p, line& q)
+{
+    int max = 0;
+
+    int i, j;
+    int start;  // 答案的头位置
+    if (p.type == 0)  //英文敏感词
+    {
+        i = 0;
+        for (j = 0; j < q.leng; j++)
+        {
+            //大写转换为小写
+            if (q.content[j] >= 'A' && q.content[j] <= 'Z')
+                q.content[j] += 'a' - 'A';
+            if (p.word[i] == q.content[j])
+            {
+                max++;
+                if (max > 20) break;  // 敏感词中间穿插了超过20个字符就不检测
+                if (i == 0) start = j;
+                i++;
+                if (i == p.Leng)  // 匹配成功
+                {
+                    ansout[sum].anstart = start;
+                    ansout[sum].ansend = j;
+                    ansout[sum].num = q.LINE;
+                    ansout[sum].bh = p.bh;
+                    sum++;
+                    i = 0;
+                    max = 0;
+                }
+            }
+        }
+    }
+    if (p.type == 1)  // 汉字敏感词
+    {
+        i = 0;
+        //如果是汉语，在UTF-8中三个字节才能代表一个字符。
+        for (j = 0; j < q.leng; j++)
+        {
+            if (p.word[i] == q.content[j] && p.word[i + 1] == q.content[j + 1] && p.word[i + 2] == q.content[j + 2])  //三个字节相等=一个汉字匹配
+            {
+                max++;
+                if (max > 60) break;  // 敏感词中间穿插了超过60个字符就不检测
+                if (i == 0) start = j;
+                i += 3;
+                j += 2;
+                if (i == p.Leng)  //匹配成功
+                {
+                    ansout[sum].anstart = start;
+                    ansout[sum].ansend = j;
+                    ansout[sum].num = q.LINE;
+                    ansout[sum].bh = p.bh;
+                    sum++;
+                    i = 0;
+                    max = 0;
+                }
+            }
+        }
+    }
+
+}
