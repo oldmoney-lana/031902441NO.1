@@ -1,0 +1,50 @@
+void dj()
+{
+    string address;
+    cin >> address;  // 输入文件地址
+    ifstream in(address);  // 打开敏感词文件
+    string sensi;
+    int i = 0;
+
+    if (in) // 有该文件
+    {
+        while (getline(in, sensi)) // 行中不包括每行的换行符,sensi每次存放一个敏感词
+        {
+            words[i].word = sensi;
+            words[i].bh = i;
+            words[i].Leng = sensi.size();
+            if (words[i].word[0] & 0x80)
+                words[i].type = 1;  // 汉字
+            else words[i].type = 0;  // 英文
+            i++;
+            word_sum++;
+        }
+    }
+    else // 没有该文件
+    {
+        cout << "no such file" << endl;
+        return;
+    }
+    int x = i;
+    in.close();
+
+    //读入测试文本
+    cin >> address;
+    ifstream f(address);  // 打开测试文本
+    string sentence;
+    int j = 0;
+    if (f)  // 有该文件
+    {
+        while (getline(f, sentence))
+        {
+            l[j].content = sentence;  //测试文本的每一行存入line结构体数组l中的content
+            l[j].LINE = j + 1;
+            l[j].leng = sentence.size();
+            j++;
+            line_sum++;
+        }
+    }
+    else return;
+    int y = j;
+    f.close();
+}
