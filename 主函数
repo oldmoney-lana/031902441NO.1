@@ -1,0 +1,13 @@
+int main()
+{
+    system("chcp 65001");  //utf-8
+    string language;
+    cin >> language;  //输入main.exe
+    int i = 0, j = 0;
+    dj();
+    for (i = 0; i < line_sum; i++)
+        for (j = 0; j < word_sum; j++)
+            search(words[j], l[i]);
+    print();
+    return 0;
+}
