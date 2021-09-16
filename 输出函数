@@ -1,0 +1,18 @@
+void print()
+{
+    string address;
+    cin >> address;
+    ofstream out;
+    out.open(address);
+    int i, j;
+    out << "Total: " << sum << endl;
+    for (i = 0; i < sum; i++)
+    {
+        out << "Line" << ansout[i].num << ": <" << words[ansout[i].bh].word << "> ";
+        for (j = ansout[i].anstart; j <= ansout[i].ansend; j++)
+        {
+            out << l[ansout[i].num - 1].content[j];
+        }
+        out << endl;
+    }
+}
