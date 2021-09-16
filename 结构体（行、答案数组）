@@ -1,0 +1,15 @@
+struct line
+{
+    int leng;
+    int LINE;
+    string content;  // 内容
+}l[1001];
+
+struct answer
+{
+    int num;  // 存放敏感词在哪一行出现
+    int bh;
+    string ans;  // 存放测试文本中的含敏感词的字符串
+    int anstart;  // 头位置
+    int ansend;  // 尾位置
+}ansout[2000];
