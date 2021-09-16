@@ -1,0 +1,9 @@
+//敏感词类
+class sensitivewords
+{
+public:
+    int bh;  // 编号
+    string word;
+    int type;  // 英文0，汉字1
+    int Leng;  // 敏感词长度
+}words[500];
